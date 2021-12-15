@@ -1,12 +1,14 @@
-package com.myConference.SIIProject.infrastructure.repositories.userdevice;
+package com.myConference.SIIProject.infrastructure.userdevice;
 
+import com.myConference.SIIProject.domain.user.account.UserAccount;
+import com.myConference.SIIProject.domain.user.account.UserDevice;
+import com.myConference.SIIProject.domain.user.account.UserDeviceRepository;
 import lombok.AllArgsConstructor;
-import pl.kul.blog.domain.user.account.UserAccount;
-import pl.kul.blog.domain.user.account.UserDevice;
-import pl.kul.blog.domain.user.account.UserDeviceRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Component
 @AllArgsConstructor
 public class DelegatingUserDeviceRepository implements UserDeviceRepository {
     private final JpaBasedUserDeviceRepository userDeviceRepository;

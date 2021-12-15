@@ -1,60 +1,24 @@
 package com.myConference.SIIProject;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.myConference.SIIProject.domain.user.*;
-import com.myConference.SIIProject.domain.user.account.UserAccountRepository;
-import com.myConference.SIIProject.infrastructure.api.user.authentication.UserAuthenticationEndpoint;
-
+import com.myConference.SIIProject.domain.user.CreateUserCommand;
+import io.restassured.RestAssured;
+import io.restassured.response.ValidatableResponse;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.Assert.assertEquals;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-
-@RunWith(SpringRunner.class)
-@WebMvcTest(UserAuthenticationEndpoint.class)
-@ContextConfiguration("/applicationContext.xml")
-
-public class CreateUserTest {
-
-    @Autowired
-    private MockMvc mvc;
-    ObjectMapper objectMapper = new ObjectMapper();
-
-    @MockBean
-    UserAccountRepository userAccountRepository;
-    DeviceAuthenticationService deviceAuthenticationService;
-
+public class CreateUserTest extends BaseIntegrationTest {
 
     @Test
     public void givenTokenBackWhenUserCreated() throws Exception {
-
-
         CreateUserCommand createUserCommand = new CreateUserCommand("Dawid", "Puka",
-                "Dawidos", "Lolek123");
+            "Dawidos", "Lolek123");
 
+        ValidatableResponse response = RestAssured.given()
+            .body(createUserCommand)
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .post(localhost().path("/authentication/signup").toUriString())
+            .then();
 
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/authentication/signup")
-                .accept(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(createUserCommand));
-
-        mvc.perform(requestBuilder)
-                .andExpect(status().isOk());
-
-
-
+        response.statusCode(200);
     }
 }

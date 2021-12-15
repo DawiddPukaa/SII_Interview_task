@@ -1,8 +1,8 @@
-package com.myConference.SIIProject.infrastructure.repositories.userdevice;
+package com.myConference.SIIProject.infrastructure.userdevice;
 
+import com.myConference.SIIProject.domain.user.account.UserAccount;
+import com.myConference.SIIProject.domain.user.account.UserDevice;
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.kul.blog.domain.user.account.UserAccount;
-import pl.kul.blog.domain.user.account.UserDevice;
 
 import java.util.Optional;
 import java.util.UUID;
