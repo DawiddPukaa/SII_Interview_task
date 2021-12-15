@@ -1,5 +1,6 @@
 package com.myConference.SIIProject;
 
+
 import com.myConference.SIIProject.domain.user.CreateUserCommand;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;

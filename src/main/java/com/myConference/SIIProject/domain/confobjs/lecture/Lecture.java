@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -22,19 +23,21 @@ public class Lecture {
     @GeneratedValue
     UUID id;
 
-        @Lob
-        String content;
 
-        Instant postedOn;
+    String nameOfLecture;
+    @Lob
+    String describeOfLecpture;
 
-        @ManyToOne(cascade = {}, fetch = FetchType.LAZY)
-        UserAccount postedBy;
+    //Instant postedOn;
 
-        @ManyToOne(cascade = {}, fetch = FetchType.LAZY)
-        ThematicPath onWchihThemiaticPath;
+    @ManyToOne(cascade = {}, fetch = FetchType.LAZY)
+    Set<UserAccount> usersJoinedLecture;
 
-        @Version
-        Long version;
-    }
+    @ManyToOne(cascade = {}, fetch = FetchType.LAZY)
+    ThematicPath thematicPath;
+
+    @Version
+    Long version;
+}
 
 

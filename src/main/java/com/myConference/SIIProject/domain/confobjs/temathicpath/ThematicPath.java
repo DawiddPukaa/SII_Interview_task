@@ -15,14 +15,6 @@ import javax.persistence.Id;
 @Builder
 
 public class ThematicPath {
-    private Long id;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Id
-    public Long getId() {
-        return id;
-    }
+    Long id;
 }

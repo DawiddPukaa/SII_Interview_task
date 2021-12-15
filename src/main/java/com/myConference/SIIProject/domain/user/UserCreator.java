@@ -31,10 +31,11 @@ public class UserCreator {
                 .isEnabled(true)
                 .build());
 
-        UserAccountAssignedRole userAccountAssignedRole = userAccountAssignedRoleRepository.save(UserAccountAssignedRole.builder()
-                .role(UserAccountRole.REGULAR)
-                .userAccount(createdUser)
-                .build());
+        UserAccountAssignedRole build = UserAccountAssignedRole.builder()
+            .role(UserAccountRole.REGULAR)
+            .userAccount(createdUser)
+            .build();
+        UserAccountAssignedRole userAccountAssignedRole = userAccountAssignedRoleRepository.save(build);
 
         createdUser.setRoles(new HashSet<>(Set.of(userAccountAssignedRole)));
         return userAccountRepository.save(createdUser);
