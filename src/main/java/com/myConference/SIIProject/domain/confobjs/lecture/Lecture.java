@@ -1,19 +1,22 @@
 package com.myConference.SIIProject.domain.confobjs.lecture;
 
-import com.myConference.SIIProject.domain.user.account.UserAccount;
-
-import java.util.Set;
+import javax.persistence.*;
 
 public class Lecture {
 
-    public Lecture(String nameOfLecture, int idConference) {
+    private String nameOfLecture;
+    private int lectureLayer;
+    private int lectureId;
+    private int numberOfUsers;
+
+    public Lecture(String nameOfLecture, int lectureLayer,int lectureId) {
         this.nameOfLecture = nameOfLecture;
-        this.idConference = idConference;
+        this.lectureLayer = lectureLayer;
     }
 
-    private String nameOfLecture;
-    private int idConference;
-    Set<UserAccount> usersJoinedLecture;
+    public void setNumberOfUsers(int numberOfUsers) {
+        this.numberOfUsers = numberOfUsers;
+    }
 
 }
 
