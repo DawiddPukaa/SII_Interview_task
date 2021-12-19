@@ -1,9 +1,12 @@
 package com.myConference.SIIProject.domain.confobjs.temathicpath;
 
-import lombok.*;
+import com.myConference.SIIProject.domain.confobjs.conference.ConferencePanel;
+import com.myConference.SIIProject.domain.confobjs.lecture.Lecture;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.*;
+import javax.persistence.*;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -15,6 +18,21 @@ import javax.persistence.Id;
 @Builder
 
 public class ThematicPath {
+
     @Id
-    Long id;
+    @GeneratedValue
+    UUID id;
+
+    String nameOfThematicPath;
+    String describeOfThematicPath;
+
+
+    @OneToMany(cascade = {}, fetch = FetchType.LAZY)
+    List<Lecture> lecturesInThePath;
+
+    @ManyToOne(cascade = {}, fetch = FetchType.LAZY)
+    ConferencePanel conferencePanel;
+
+    @Version
+    Long version;
 }
