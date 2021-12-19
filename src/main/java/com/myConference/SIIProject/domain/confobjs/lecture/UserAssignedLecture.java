@@ -5,7 +5,7 @@ import com.myConference.SIIProject.domain.user.account.UserAccount;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,24 +16,19 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Lecture {
+
+public class UserAssignedLecture {
 
     @Id
     @GeneratedValue
     UUID id;
 
-
-    String nameOfLecture;
-    String describeOfLecture;
+    @OneToOne(cascade = {}, fetch = FetchType.LAZY)
+    UserAccount userAccount;
 
     @OneToMany(cascade = {}, fetch = FetchType.LAZY)
-    Set<UserAccount> usersJoinedLecture;
-
-    @ManyToOne(cascade = {}, fetch = FetchType.LAZY)
-    ThematicPath thematicPath;
+    List<Lecture> usersLectures;
 
     @Version
     Long version;
 }
-
-

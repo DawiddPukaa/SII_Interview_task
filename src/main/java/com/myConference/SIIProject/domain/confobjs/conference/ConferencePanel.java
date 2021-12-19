@@ -1,11 +1,11 @@
-package com.myConference.SIIProject.domain.confobjs.lecture;
+package com.myConference.SIIProject.domain.confobjs.conference;
 
 import com.myConference.SIIProject.domain.confobjs.temathicpath.ThematicPath;
 import com.myConference.SIIProject.domain.user.account.UserAccount;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,24 +16,19 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Lecture {
+
+public class ConferencePanel {
 
     @Id
     @GeneratedValue
     UUID id;
 
-
-    String nameOfLecture;
-    String describeOfLecture;
+    String nameOfConference;
+    String describeOfConference;
 
     @OneToMany(cascade = {}, fetch = FetchType.LAZY)
-    Set<UserAccount> usersJoinedLecture;
-
-    @ManyToOne(cascade = {}, fetch = FetchType.LAZY)
-    ThematicPath thematicPath;
+    List<ThematicPath> thematicPathList;
 
     @Version
     Long version;
 }
-
-

@@ -10,15 +10,16 @@ import org.springframework.http.MediaType;
 public class CreateUserTest extends BaseIntegrationTest {
 
     @Test
-    public void givenTokenBackWhenUserCreated() throws Exception {
+    public void createUser() throws Exception {
+
         CreateUserCommand createUserCommand = new CreateUserCommand("Dawid", "Puka",
-            "Dawidos", "Lolek123");
+                "Dawidos", "Lolek123");
 
         ValidatableResponse response = RestAssured.given()
-            .body(createUserCommand)
-            .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .post(localhost().path("/authentication/signup").toUriString())
-            .then();
+                .body(createUserCommand)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .post(localhost().path("/authentication/signup").toUriString())
+                .then();
 
         response.statusCode(200);
     }
