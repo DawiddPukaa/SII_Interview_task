@@ -5,8 +5,6 @@ import com.myConference.SIIProject.domain.confobjs.conference.CreateConferencePa
 import com.myConference.SIIProject.domain.confobjs.lecture.CreateLectureCommand;
 import com.myConference.SIIProject.domain.confobjs.temathicpath.CreateThematicPath;
 
-import org.junit.Test;
-
 import java.util.List;
 
 public class ConferenceTestClass {
