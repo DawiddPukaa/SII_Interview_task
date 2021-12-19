@@ -1,16 +1,14 @@
 package com.myConference.SIIProject.domain.confobjs.conference;
 
 import com.myConference.SIIProject.domain.confobjs.temathicpath.ThematicPath;
+import lombok.AllArgsConstructor;
+
 import java.util.List;
-import java.util.UUID;
 
-
+@AllArgsConstructor
 public class ConferencePanel {
 
-    UUID id;
-
     String nameOfConference;
-    String describeOfConference;
 
     List<ThematicPath> thematicPathList;
 

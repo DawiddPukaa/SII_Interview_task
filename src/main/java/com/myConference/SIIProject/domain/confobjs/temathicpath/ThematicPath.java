@@ -1,6 +1,5 @@
 package com.myConference.SIIProject.domain.confobjs.temathicpath;
 
-import com.myConference.SIIProject.domain.confobjs.conference.ConferencePanel;
 import com.myConference.SIIProject.domain.confobjs.lecture.Lecture;
 
 import java.util.List;
@@ -9,14 +8,22 @@ import java.util.List;
 
 public class ThematicPath {
 
-    String nameOfThematicPath;
-    String describeOfThematicPath;
+    public ThematicPath(List<Lecture> lecturesInThePath) {
+        this.lecturesInThePath = lecturesInThePath;
+    }
 
+    public ThematicPath(String nameOfThematicPath, int thematicPathid, List<Lecture> lecturesInThePath) {
+        this.nameOfThematicPath = nameOfThematicPath;
+        this.thematicPathid = thematicPathid;
+        this.lecturesInThePath = lecturesInThePath;
+    }
 
-
+    private String nameOfThematicPath;
+    private int thematicPathid;
     List<Lecture> lecturesInThePath;
 
 
-    ConferencePanel conferencePanel;
-
+    public List<ThematicPath> makeThematicPath() {
+        return null;
+    }
 }
