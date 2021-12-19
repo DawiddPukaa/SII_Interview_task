@@ -26,8 +26,8 @@ public class UserAssignedLecture {
     @OneToOne(cascade = {}, fetch = FetchType.LAZY)
     UserAccount userAccount;
 
-    @OneToMany(cascade = {}, fetch = FetchType.LAZY)
-    List<Lecture> usersLectures;
+    @OneToOne(cascade = {}, fetch = FetchType.LAZY)
+    Lecture usersLectures;
 
     @Version
     Long version;
