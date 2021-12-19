@@ -1,39 +1,23 @@
 package com.myConference.SIIProject.domain.confobjs.lecture;
 
-import com.myConference.SIIProject.domain.confobjs.temathicpath.ThematicPath;
-import com.myConference.SIIProject.domain.user.account.UserAccount;
-import lombok.*;
 
-import javax.persistence.*;
-import java.util.Set;
-import java.util.UUID;
-
-@Entity
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Lecture {
 
-    @Id
-    @GeneratedValue
-    UUID id;
+    private String nameOfLecture;
+    private int lectureLayer;
+    private int lectureId;
+    private int numberOfUsers;
 
+    public Lecture(String nameOfLecture, int lectureLayer,int lectureId) {
+        this.nameOfLecture = nameOfLecture;
+        this.lectureLayer = lectureLayer;
+        this.lectureId = lectureId;
+    }
 
-    String nameOfLecture;
-    String describeOfLecture;
+    public void setNumberOfUsers(int numberOfUsers) {
+        this.numberOfUsers = numberOfUsers;
+    }
 
-    @OneToMany(cascade = {}, fetch = FetchType.LAZY)
-    Set<UserAccount> usersJoinedLecture;
-
-    @ManyToOne(cascade = {}, fetch = FetchType.LAZY)
-    ThematicPath thematicPath;
-
-    @Version
-    Long version;
 }
 
 

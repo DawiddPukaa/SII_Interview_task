@@ -1,38 +1,29 @@
 package com.myConference.SIIProject.domain.confobjs.temathicpath;
 
-import com.myConference.SIIProject.domain.confobjs.conference.ConferencePanel;
 import com.myConference.SIIProject.domain.confobjs.lecture.Lecture;
 
-import lombok.*;
-import javax.persistence.*;
 import java.util.List;
-import java.util.UUID;
 
-@Entity
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+
 
 public class ThematicPath {
 
-    @Id
-    @GeneratedValue
-    UUID id;
+    public ThematicPath(List<Lecture> lecturesInThePath) {
+        this.lecturesInThePath = lecturesInThePath;
+    }
 
-    String nameOfThematicPath;
-    String describeOfThematicPath;
+    public ThematicPath(String nameOfThematicPath, int thematicPathid, List<Lecture> lecturesInThePath) {
+        this.nameOfThematicPath = nameOfThematicPath;
+        this.thematicPathid = thematicPathid;
+        this.lecturesInThePath = lecturesInThePath;
+    }
 
-
-    @OneToMany(cascade = {}, fetch = FetchType.LAZY)
+    private String nameOfThematicPath;
+    private int thematicPathid;
     List<Lecture> lecturesInThePath;
 
-    @ManyToOne(cascade = {}, fetch = FetchType.LAZY)
-    ConferencePanel conferencePanel;
 
-    @Version
-    Long version;
+    public List<ThematicPath> makeThematicPath() {
+        return null;
+    }
 }
