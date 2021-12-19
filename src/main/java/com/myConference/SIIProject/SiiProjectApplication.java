@@ -31,10 +31,12 @@ public class SiiProjectApplication {
     private static List<ThematicPath> createThematicspath(List<String> namesOfLecture) {
         List<Lecture> tmplectures = new ArrayList<>();
         List<ThematicPath> thematicPathList = new ArrayList<>();
+        int lectureId = 0;
         for (int i = 0; i < namesOfLecture.size(); i++) {
             for (int j = 0; j < 3; j++) {
                 int v = j + 1;
-                Lecture lecture = new Lecture(namesOfLecture.get(i) + " " + v, j + 1,j);
+                lectureId++;
+                Lecture lecture = new Lecture(namesOfLecture.get(i) + " " + v, j + 1,lectureId);
                 tmplectures.add(lecture);
             }
             List<Lecture> lectures = new ArrayList<>(tmplectures);

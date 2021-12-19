@@ -1,6 +1,5 @@
 package com.myConference.SIIProject.domain.confobjs.lecture;
 
-import javax.persistence.*;
 
 public class Lecture {
 
@@ -12,6 +11,7 @@ public class Lecture {
     public Lecture(String nameOfLecture, int lectureLayer,int lectureId) {
         this.nameOfLecture = nameOfLecture;
         this.lectureLayer = lectureLayer;
+        this.lectureId = lectureId;
     }
 
     public void setNumberOfUsers(int numberOfUsers) {
