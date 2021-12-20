@@ -1,37 +1,40 @@
 package com.myConference.SIIProject.domain.confobjs.lecture;
 
+import com.myConference.SIIProject.domain.confobjs.temathicpath.ThematicPath;
+import com.myConference.SIIProject.domain.user.account.UserAccount;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Version;
-import java.util.UUID;
+import javax.persistence.*;
+import java.util.Set;
+
 
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = "lectures")
-@ToString(exclude = "lectures")
+@EqualsAndHashCode(exclude = {"userAccounts","thematicPath"})
+@ToString(exclude = {"userAccounts","thematicPath"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
-
 public class Lecture {
 
     @Id
-    private int lectureId;
+    @GeneratedValue
+    Integer id;
 
     private String nameOfLecture;
     private int lectureLayer;
-    private int numberOfUsers;
-    UUID usernameId;
 
-    public Lecture(String nameOfLecture, int lectureLayer,int lectureId) {
-        this.nameOfLecture = nameOfLecture;
-        this.lectureLayer = lectureLayer;
-        this.lectureId = lectureId;
-    }
+    /*@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    ThematicPath thematicPath;*/
+
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(
+            name = "user_lecture",
+            joinColumns = @JoinColumn(name = "lecture_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    Set<UserAccount> userAccounts;
 
     @Version
     Long version;

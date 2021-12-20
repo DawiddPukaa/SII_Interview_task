@@ -1,5 +1,6 @@
 package com.myConference.SIIProject.domain.user.account;
 
+import com.myConference.SIIProject.domain.confobjs.lecture.Lecture;
 import
         lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,7 +30,7 @@ public class UserAccount {
     @Id
     @GeneratedValue
     UUID id;
-
+//wszytskie pola prywatne
     String name;
     String secondName;
     String username;
@@ -40,8 +41,10 @@ public class UserAccount {
     Boolean isCredentialsExpired;
     Boolean isEnabled;
 
+    @ManyToMany(mappedBy = "userAccounts")
+    Set<Lecture> lectures;
     @OneToMany(mappedBy = "userAccount", fetch = FetchType.EAGER)
-     Set<UserAccountAssignedRole> roles;
+    Set<UserAccountAssignedRole> roles;
 
     @Version
     Long version;

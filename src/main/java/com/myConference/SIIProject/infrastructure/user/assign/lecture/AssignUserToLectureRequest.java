@@ -5,23 +5,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.myConference.SIIProject.domain.confobjs.userAssignedToLecture.CreateAssignUserToLectureCommand;
 import lombok.Value;
 
-import java.util.UUID;
-
 @Value
 public class AssignUserToLectureRequest {
 
-    UUID userId;
-    int lectureId;
+    Integer lectureId;
 
     @JsonCreator
     public AssignUserToLectureRequest(
-            @JsonProperty("name") UUID userId,
-            @JsonProperty("secondName") int lectureId
+            @JsonProperty("lectureId") Integer lectureId
 
     ) {
-        this.userId = userId;
         this.lectureId = lectureId;
     }
 
-    public CreateAssignUserToLectureCommand toDomainCommand() {return new CreateAssignUserToLectureCommand(userId,lectureId);}
+    public CreateAssignUserToLectureCommand toDomainCommand() {return new CreateAssignUserToLectureCommand(lectureId);}
 }

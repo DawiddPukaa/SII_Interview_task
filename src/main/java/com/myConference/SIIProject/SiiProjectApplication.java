@@ -1,53 +1,45 @@
 package com.myConference.SIIProject;
 
-import com.myConference.SIIProject.domain.confobjs.conference.ConferencePanel;
 import com.myConference.SIIProject.domain.confobjs.lecture.Lecture;
+import com.myConference.SIIProject.domain.confobjs.lecture.LectureRepository;
 import com.myConference.SIIProject.domain.confobjs.temathicpath.ThematicPath;
+import com.myConference.SIIProject.domain.confobjs.temathicpath.ThematicPathReposiotry;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class SiiProjectApplication {
-    private static final List<String> namesOfLectures = List.of(new String[]{"Java", "C++", ".NET"});
+
+    private static final String[] topics = {"Java", "C++", ".Net"};
 
     public static void main(String[] args) {
-
-        //1.
-
-        ConferencePanel conferencePanel = createConferece(createThematicspath(namesOfLectures));
-
-        //2.
-
-        //zapisy użytkowników na prelekcje do bazy
-
-        //3.
-
+        SpringApplication.run(SiiProjectApplication.class, args);
 
     }
 
-    private static List<ThematicPath> createThematicspath(List<String> namesOfLecture) {
-        List<Lecture> tmplectures = new ArrayList<>();
-        List<ThematicPath> thematicPathList = new ArrayList<>();
-        int lectureId = 0;
-        for (int i = 0; i < namesOfLecture.size(); i++) {
-            for (int j = 0; j < 3; j++) {
-                int v = j + 1;
-                lectureId++;
-                Lecture lecture = new Lecture(namesOfLecture.get(i) + " " + v, j + 1,lectureId);
-                tmplectures.add(lecture);
+    //@org.jetbrains.annotations.NotNull
+    //@org.jetbrains.annotations.Contract(pure = true)
+    @Bean
+    @ConditionalOnProperty(name = "load-initial-data", havingValue = "true")
+    public static CommandLineRunner initialDataLoader(LectureRepository lectureRepository,
+                                                      ThematicPathReposiotry thematicPathReposiotry) {
+        return (args) -> {
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    if (j == 0) {
+                        ThematicPath thematicPath = new ThematicPath();
+                        thematicPath.setNameOfThematicPath(topics[i]);
+                        thematicPathReposiotry.save(thematicPath);
+                    }
+                    Lecture lecture = new Lecture();
+                    lecture.setNameOfLecture(topics[i]+" "+ i+1);
+                    lecture.setLectureLayer(j+1);
+                    lectureRepository.save(lecture);
+                }
             }
-            List<Lecture> lectures = new ArrayList<>(tmplectures);
-            thematicPathList.add(new ThematicPath(namesOfLecture.get(i), i + 1, lectures));
-            tmplectures.clear();
-        }
-        return thematicPathList;
+        };
     }
-
-    private static ConferencePanel createConferece(List<ThematicPath> thematicPathList) {
-        return new ConferencePanel("MyOwnConference", thematicPathList);
-    }
-
 }

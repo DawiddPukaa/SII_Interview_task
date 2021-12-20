@@ -15,7 +15,7 @@ public class AssignUserToLectureService {
 
     private final AssignUserToLectureCreator assignUserToLectureCreator;
 
-    @Transactional
+
     public AssignUserToLectureResult assignUserToLecture(CreateAssignUserToLectureCommand command) {
 
         UserAssignedToLecture userAssignedToLecture = assignUserToLectureCreator.create(command);

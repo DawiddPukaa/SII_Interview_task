@@ -31,17 +31,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests(it -> it
-                .antMatchers("/api/**").hasRole("REGULAR")
-                .antMatchers("/authentication/signup").permitAll()
-                .antMatchers("/authentication/signin").permitAll()
-            )
-            .csrf(AbstractHttpConfigurer::disable)
-            .httpBasic(AbstractHttpConfigurer::disable)
-            .formLogin(AbstractHttpConfigurer::disable)
-            .sessionManagement(it -> it.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .addFilterBefore(authenticationFiltersFactory.createUsernameAndPasswordAuthenticationFilter(authenticationManager(), "/authentication/signin"), RequestCacheAwareFilter.class)
-            .addFilterBefore(authenticationFiltersFactory.createTokenAuthenticationFilter(authenticationManager(), "/api/**"), RequestCacheAwareFilter.class)
+                .authorizeRequests(it -> it
+                        .antMatchers("/api/**").hasRole("REGULAR")
+                        .antMatchers("/authentication/signup").permitAll()
+                        .antMatchers("/authentication/signin").permitAll()
+                )
+                .csrf(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
+                .sessionManagement(it -> it.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(authenticationFiltersFactory.createUsernameAndPasswordAuthenticationFilter(authenticationManager(), "/authentication/signin"), RequestCacheAwareFilter.class)
+                .addFilterBefore(authenticationFiltersFactory.createTokenAuthenticationFilter(authenticationManager(), "/api/**"), RequestCacheAwareFilter.class)
+                .csrf().disable()
+                .headers().frameOptions().disable()
+
         ;
     }
 
@@ -52,7 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
 
         auth.authenticationProvider(tokenAuthenticationProvider)
-            .authenticationProvider(daoAuthenticationProvider)
+                .authenticationProvider(daoAuthenticationProvider)
         ;
     }
 }
