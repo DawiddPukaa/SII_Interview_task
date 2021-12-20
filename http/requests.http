@@ -1,0 +1,31 @@
+### Rejestracja użytkownika
+POST http://localhost:8082/authentication/signup
+Content-Type: application/json
+Accept: application/json
+
+{
+  "login": "user1",
+  "password": "some-passowrd"
+}
+
+### Zaloguj się
+POST http://localhost:8082/authentication/signin
+Content-Type: application/json
+Accept: application/json
+
+{
+  "login": "user1",
+  "password": "some-password"
+}
+
+### Inne endpointy
+
+POST http://localhost:8082/api/assign/user-to-lecture
+Content-Type: application/json
+Authorization: token Q8wpoUydXDfvdh/E1cvSNVFbNt0b81q7I1WM1vdkZ5ia+x62JF6RP2pv9lexGV8PX3FvhY4LrwpA4krCeMLHEg==
+Accept: application/json
+
+{
+  "lectureId": "2"
+}
+
